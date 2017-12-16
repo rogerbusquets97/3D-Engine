@@ -1,5 +1,6 @@
 #include "AudioEvent.h"
 #include "ModuleImGui.h"
+#include "AudioSource.h"
 
 AudioEvent::AudioEvent()
 {
@@ -24,16 +25,20 @@ void AudioEvent::Load(JSON_File * file, SoundBank * p, int id)
 	this->parent = p;
 }
 
-void AudioEvent::UIDraw(Wwise::SoundObject* obj)
+void AudioEvent::UIDraw(AudioSource* parent )
 {
 	if (ImGui::CollapsingHeader(name.c_str())) {
 		if (ImGui::Button("Play")) {
 			//play event
-			obj->PlayEvent(name.c_str());
+			parent->obj->PlayEvent(name.c_str());
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Stop")) {
 			AK::SoundEngine::ExecuteActionOnEvent(name.c_str(), AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Pause);
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Send")) {
+			parent->SendEvent(name.c_str());
 		}
 	}
 }

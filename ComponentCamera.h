@@ -11,6 +11,7 @@ class ComponentCamera : public Component {
 public:
 
 	ComponentCamera(GameObject* own);
+	ComponentCamera();
 	~ComponentCamera();
 
 	void Start();
@@ -20,6 +21,8 @@ public:
 	bool IsInside(AABB& bounding_box);
 	void UI_draw();
 	bool GetCulling() const;
+	void Serialize(JSON_File* doc);
+
 
 private:
 	Camera3D* camera = nullptr;

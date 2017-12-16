@@ -22,12 +22,12 @@ void PlayPause::Draw(Application* App)
 		bool playbutton = (App->tm->GetGameState() == IN_PLAY) ? true : false;
 		if (ImGui::Checkbox("PLAY", &playbutton)) {
 			// Testing
-			AudioSource* source = (AudioSource*)App->scene_intro->camera_obj->FindComponentbyType(AUDIO_SOURCE);
+			/*AudioSource* source = (AudioSource*)App->scene_intro->camera_obj->FindComponentbyType(AUDIO_SOURCE);
 			source->SendEvent("Play_Blend");
 			AudioSource* s = (AudioSource*)App->scene_intro->static_obj->FindComponentbyType(AUDIO_SOURCE);
 			s->SendEvent("Play_Short_Music");
 			AudioSource* sound = (AudioSource*)App->scene_intro->non_static_obj->FindComponentbyType(AUDIO_SOURCE);
-			sound->SendEvent("Play_spell4");
+			sound->SendEvent("Play_spell4");*/
 		};
 		if (App->tm->GetGameState() != IN_PLAY && playbutton == true)
 			App->tm->SetGameState(IN_PLAY);
@@ -39,9 +39,6 @@ void PlayPause::Draw(Application* App)
 			App->audio->StopAllEvents();
 		};
 		ImGui::SameLine();
-		if (ImGui::SmallButton("Next Frame")) {
-			App->tm->NextFrame();
-		}
 		ImGui::Separator();
 		float tm = App->tm->GetTimeMultiplier();
 		if (ImGui::SliderFloat("timeMultiplier", &tm, 0, TIMEMULTIPLIER_LIMIT, "%.0f", TIMEMULTIPLIER_STEP)) {

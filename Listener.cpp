@@ -18,7 +18,10 @@ Listener::Listener(GameObject * own) : Component(own)
 
 Listener::Listener()
 {
-
+	Setname("Audio Listener");
+	SetType(LISTENER);
+	obj = App->audio->CreateListener("Object", float3(0,0,0));
+	App->audio->default_listener = this;
 }
 
 Listener::~Listener()
@@ -64,10 +67,10 @@ AkGameObjectID  Listener::GetId() const
 
 void Listener::Serialize(JSON_File * doc)
 {
-	/*if (doc == nullptr)
+	if (doc == nullptr)
 		return;
 
 	doc->SetNumber("type", type);
 	doc->SetNumber("ownerUID", (owner != nullptr) ? owner->GetUID() : -1);
-	doc->SetString("name", name);*/
+	doc->SetString("name", name);
 }

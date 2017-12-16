@@ -13,6 +13,7 @@
 #include "ModuleAudio.h"
 #include "AudioSource.h"
 #include "TimeManager.h"
+#include "Move.h"
 
 #include <AK/Plugin/AkMatrixReverbFXFactory.h>
 #pragma comment( lib, "Wwise/Debug(StaticCRT)/lib/AkMatrixReverbFX.lib");
@@ -47,7 +48,7 @@ bool ModuleSceneIntro::Start()
 	// the movement is coded in the scene. So I cannot save and load the scene and make the object move once the scene is loaded again, but note that all the audio components can be serialized anyway. 
 
 
-	camera_obj = new GameObject("Camera", root);
+	/*camera_obj = new GameObject("Camera", root);
 
 	Quat rot = Quat::identity;
 	float3 scale;
@@ -91,6 +92,8 @@ bool ModuleSceneIntro::Start()
 	non_static_obj->AddComponent(new_mat);
 	all_objects.push_back(non_static_obj);
 	non_static_objects.push_back(non_static_obj);
+	Move* move = new Move(non_static_obj);
+	non_static_obj->AddComponent(move);
 	//Static object
 	static_obj = new GameObject("Static Object", root);
 	
@@ -116,7 +119,7 @@ bool ModuleSceneIntro::Start()
 	mat->AddTexture(tex);
 	static_obj->AddComponent(mat);
 	all_objects.push_back(static_obj);
-	non_static_objects.push_back(static_obj);
+	non_static_objects.push_back(static_obj);*/
 
 
 	float3 max_point;
@@ -131,13 +134,13 @@ bool ModuleSceneIntro::Start()
 	
 	
 	
-	selected = camera_obj;
+	//selected = camera_obj;
 	
 	change = false;
 	curr_time = 0;
 
 	
-	App->camera->SetCurrentCamera(cam->GetCamera());
+	//App->camera->SetCurrentCamera(cam->GetCamera());
 
 
 	
@@ -475,6 +478,8 @@ const char * ModuleSceneIntro::LoadScene(const char * scene_name)
 		Quat r;
 		float3 s;
 		Transform* trans= nullptr;
+		Move* m = nullptr;
+		ComponentCamera* cam = nullptr;
 		int aux = 0;
 		const char* mpath = nullptr;
 
@@ -549,12 +554,26 @@ const char * ModuleSceneIntro::LoadScene(const char * scene_name)
 		case AUDIO_SOURCE:
 			new_source = new AudioSource();
 			new_source->Setname(scene_doc->GetString("name"));
+			if (App->audio->soundbank != nullptr) {
+				new_source->soundbank = App->audio->soundbank;
+			}
 			c = new_source;
 			break;
 		case LISTENER:
 			listener = new Listener();
 			listener->Setname(scene_doc->GetString("name"));
 			c = listener;
+			break;
+		case MOVE:
+			m = new Move();
+			m->Setname(scene_doc->GetString("name"));
+			c = m;
+			break;
+		case CAMERA: 
+			cam = new ComponentCamera();
+			cam->Setname(scene_doc->GetString("name"));
+			c = cam;
+			App->camera->SetCurrentCamera(cam->GetCamera());
 			break;
 		}
 	
@@ -604,21 +623,6 @@ const char * ModuleSceneIntro::LoadScene(const char * scene_name)
 
 			}
 
-			GameObject* cam_obj = new GameObject("Camera", root);
-			Quat rot = Quat::identity;
-
-			float3 scale;
-			float3 pos;
-			scale.Set(1, 1, 1);
-			pos.Set(0, 0, 0);
-			Transform* trans = new Transform(cam_obj);
-			trans->SetRotation(rot);
-			trans->SetPosition(pos);
-			trans->SetScale(scale);
-			cam_obj->AddComponent(trans);
-			ComponentCamera* cam = new ComponentCamera(cam_obj);
-			cam_obj->AddComponent(cam);
-			App->camera->SetCurrentCamera(cam->GetCamera());
 
 			return file.c_str();
 
@@ -672,7 +676,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	
 	
 		if (App->camera->GetCurrentCamera() != App->camera->GetEditorCamera()) {
-			Transform* t = (Transform*)camera_obj->FindComponentbyType(TRANSFORM);
+			/*Transform* t = (Transform*)camera_obj->FindComponentbyType(TRANSFORM);
 			ComponentCamera* c = (ComponentCamera*)camera_obj->FindComponentbyType(CAMERA);
 			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 				t->SetPosition(t->GetPosition() + float3(0, 0, 0.1));
@@ -685,24 +689,10 @@ update_status ModuleSceneIntro::Update(float dt)
 			}
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 				t->SetPosition(t->GetPosition() + float3(-0.1, 0, 0));
-			}
+			}*/
 		}
 
-		//Simple Movement of the moving sound NOTE: Hardecoded here since we do not have scripting
-		Transform* t = (Transform*)non_static_obj->FindComponentbyType(TRANSFORM);
-		
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT) {
-			t->SetPosition(t->GetPosition() + float3(0, 0, 0.1));
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) {
-			t->SetPosition(t->GetPosition() + float3(0, 0, -0.1));
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-			t->SetPosition(t->GetPosition() + float3(-0.1, 0, 0));
-		}
-		else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-			t->SetPosition(t->GetPosition() + float3(0.1, 0, 0));
-		}
+
 	}
 
 	DrawHierarchy();

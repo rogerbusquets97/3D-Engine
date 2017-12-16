@@ -12,7 +12,8 @@ enum COMPONENT_TYPE {
 	CAMERA,
 	LISTENER,
 	AUDIO_SOURCE,
-	DIST_ZONE
+	DIST_ZONE,
+	MOVE
 };
 
 class Component {

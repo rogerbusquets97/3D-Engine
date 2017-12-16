@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "ModuleImGui.h"
 #include "TimeManager.h"
+#include "AudioEvent.h"
 
 AudioSource::AudioSource(GameObject* own) : Component(own)
 {
@@ -14,6 +15,17 @@ AudioSource::AudioSource(GameObject* own) : Component(own)
 	Transform* trans = (Transform*)own->FindComponentbyType(TRANSFORM);
 
 	obj = App->audio->CreateSoundObject(own->GetName(), trans->GetPosition());
+	if (App->audio->soundbank != nullptr) {
+		this->soundbank = App->audio->soundbank;
+		GetEvents();
+	}
+
+}
+
+AudioSource::AudioSource()
+{
+	SetType(AUDIO_SOURCE);
+	obj = App->audio->CreateSoundObject("Object", float3(0,0,0));
 	if (App->audio->soundbank != nullptr) {
 		this->soundbank = App->audio->soundbank;
 		GetEvents();
@@ -109,11 +121,12 @@ void AudioSource::UI_draw()
 	GetEvents();
 
 	if(ImGui::CollapsingHeader("Audio Source")) {
-		
-		ImGui::Text("SoundBank: %s",soundbank->name.c_str());
-		if (ImGui::CollapsingHeader("Events")){
-			for (int i = 0; i < events.size(); i++) {
-				events[i]->UIDraw(obj);
+		if (soundbank != nullptr) {
+			ImGui::Text("SoundBank: %s", soundbank->name.c_str());
+			if (ImGui::CollapsingHeader("Events")) {
+				for (int i = 0; i < events.size(); i++) {
+					events[i]->UIDraw(this);
+				}
 			}
 		}
 	}
@@ -132,12 +145,12 @@ void AudioSource::GetEvents()
 
 void AudioSource::Serialize(JSON_File * doc)
 {
-	/*if (doc == nullptr)
+	if (doc == nullptr)
 		return;
 
 	doc->SetNumber("type", type);
 	doc->SetNumber("ownerUID", (owner != nullptr) ? owner->GetUID() : -1);
-	doc->SetString("name", name);*/
+	doc->SetString("name", name);
 }
 
 

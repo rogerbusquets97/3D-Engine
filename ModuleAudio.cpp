@@ -198,7 +198,6 @@ void ModuleAudio::ImGuiDraw()
 		ImGui::SliderInt("Volume", &volume, 0, 100);
 		ImGui::Checkbox("Mute", &muted);
 
-
 	}
 	
 

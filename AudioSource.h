@@ -4,17 +4,16 @@
 
 #include "Component.h"
 #include "ModuleAudio.h"
-#include "AudioEvent.h"
 #include "SoundBank.h"
 #include "Wwise.h"
 
-
+class AudioEvent;
 class AudioSource : public Component {
 
 public :
 
 	AudioSource(GameObject* own);
-	AudioSource() {};
+	AudioSource();
 	~AudioSource();
 
 	void Update();
@@ -35,7 +34,7 @@ private:
 	std::vector<AudioEvent*>events;
 
 	std::vector<AudioEvent*>events_to_play;
-
+public:
 	Wwise::SoundObject* obj;
 };
 

@@ -18,6 +18,13 @@ ComponentCamera::ComponentCamera(GameObject * own) : Component(own)
 	
 }
 
+ComponentCamera::ComponentCamera()
+{
+	Setname("Camera");
+	camera = new Camera3D();
+	SetType(CAMERA);
+}
+
 ComponentCamera::~ComponentCamera()
 {
 }
@@ -64,4 +71,14 @@ void ComponentCamera::UI_draw()
 bool ComponentCamera::GetCulling() const
 {
 	return camera->GetCulling();
+}
+
+void ComponentCamera::Serialize(JSON_File * doc)
+{
+	if (doc == nullptr)
+		return;
+
+	doc->SetNumber("type", type);
+	doc->SetNumber("ownerUID", (owner != nullptr) ? owner->GetUID() : -1);
+	doc->SetString("name", name);
 }

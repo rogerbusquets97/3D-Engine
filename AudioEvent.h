@@ -7,7 +7,10 @@
 #include <string>
 #include "SoundBank.h"
 #include "ModuleJson.h"
+
+
 class SoundBank;
+class AudioSource;
 
 class AudioEvent {
 
@@ -22,7 +25,7 @@ public:
 	std::string name;
 	uint id = 0;
 	bool in_3D = false;
-	void UIDraw(Wwise::SoundObject* obj);
+	void UIDraw(AudioSource* parent);
 
 	AkPlayingID playing_id = 0L;
 	AkCallbackFunc event_call_back = nullptr;
