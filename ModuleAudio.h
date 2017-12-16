@@ -51,7 +51,7 @@ public:
 	SoundBank* soundbank = nullptr;
 	bool listener_created = false;
 	int volume = DEFAULT_VOLUME;
-
+	bool muted = false;
 
 
 

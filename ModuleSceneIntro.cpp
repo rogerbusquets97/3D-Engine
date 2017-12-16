@@ -644,6 +644,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		LOG_OUT("Not applied");
 	}
 	*/
+
 	bPlane p(0, 1, 0, 0);
 	p.axis = true;
 	

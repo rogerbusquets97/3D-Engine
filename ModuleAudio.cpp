@@ -56,8 +56,12 @@ bool ModuleAudio::Start()
 
 update_status ModuleAudio::PreUpdate(float dt)
 {
-	
-	SetRTPvalue("Volume", volume);
+	if (!muted) {
+		SetRTPvalue("Volume", volume);
+	}
+	else {
+		SetRTPvalue("Volume", 0);
+	}
 
 	return UPDATE_CONTINUE;
 		
@@ -192,7 +196,13 @@ void ModuleAudio::ImGuiDraw()
 {
 	if (ImGui::CollapsingHeader("Audio Engine")) {
 		ImGui::SliderInt("Volume", &volume, 0, 100);
+		ImGui::Checkbox("Mute", &muted);
+
+
 	}
+	
+
+	
 }
 
 
