@@ -8,7 +8,8 @@
 #include "ModuleCamera3D.h"
 #include "ModuleSceneIntro.h"
 #include "AudioSource.h"
-
+#include "Move.h"
+#include "WASDmove.h"
 
 GameObject::GameObject(std::string name, GameObject* _parent) : parent(_parent)
 {
@@ -417,11 +418,40 @@ void GameObject::DrawComponents()
 		}
 	}
 
-	if (!FindComponentbyType(AUDIO_SOURCE)) {
-		if (ImGui::Button("Add Audio Source")) {
-			AudioSource* new_source = new AudioSource(this);
-			this->AddComponent(new_source);
+	if (ImGui::Button("CREATE COMPONENT"))
+		ImGui::OpenPopup("CREATE COMPONENT");
+
+	if (ImGui::BeginPopup("CREATE COMPONENT"))
+	{
+		if (ImGui::MenuItem("Camera"))
+		{
+			ComponentCamera* new_camera = new ComponentCamera(this);
+			AddComponent(new_camera);
 		}
+		if (ImGui::MenuItem("AudioSource"))
+		{
+			AudioSource* source = new AudioSource(this);
+			AddComponent(source);
+		}
+		if (ImGui::MenuItem("Listener"))
+		{
+			Listener* l = new Listener(this);
+			AddComponent(l);
+		}
+		if (ImGui::MenuItem("Movement"))
+		{
+			Move* m = new Move(this);
+			AddComponent(m);
+		}
+		if (ImGui::MenuItem("WASD"))
+		{
+			Wasd* wasd = new Wasd(this);
+			AddComponent(wasd);
+		}
+
+
+
+		ImGui::EndPopup();
 	}
 
 	
