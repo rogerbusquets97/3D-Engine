@@ -1,37 +1,37 @@
 {
     "scene": {
-        "name": "Test"
+        "name": "test"
     },
     "gameobjects": [
         {
             "static": false,
-            "UID": -622043456,
+            "UID": 551004672,
             "parentUID": -1,
             "name": "Game"
         },
         {
             "static": false,
-            "UID": 2015851008,
-            "parentUID": -622043456,
+            "UID": 1685950976,
+            "parentUID": 551004672,
             "name": "Camera"
         },
         {
             "static": false,
-            "UID": -108631392,
-            "parentUID": -622043456,
+            "UID": 1151521920,
+            "parentUID": 551004672,
             "name": "Moving Object"
         },
         {
             "static": false,
-            "UID": -746093632,
-            "parentUID": -622043456,
+            "UID": 1573318144,
+            "parentUID": 551004672,
             "name": "Static Object"
         }
     ],
     "components": [
         {
             "type": 2,
-            "ownerUID": 2015851008,
+            "ownerUID": 1685950976,
             "position": {
                 "x": 0,
                 "y": 2,
@@ -51,22 +51,27 @@
         },
         {
             "type": 3,
-            "ownerUID": 2015851008,
+            "ownerUID": 1685950976,
             "name": "Camera"
         },
         {
             "type": 4,
-            "ownerUID": 2015851008,
+            "ownerUID": 1685950976,
             "name": "Audio Listener"
         },
         {
             "type": 5,
-            "ownerUID": 2015851008,
+            "ownerUID": 1685950976,
             "name": "Camera"
         },
         {
+            "type": 8,
+            "ownerUID": 1685950976,
+            "name": "Move"
+        },
+        {
             "type": 2,
-            "ownerUID": -108631392,
+            "ownerUID": 1151521920,
             "position": {
                 "x": 0,
                 "y": 0,
@@ -86,7 +91,7 @@
         },
         {
             "type": 0,
-            "ownerUID": -108631392,
+            "ownerUID": 1151521920,
             "path": "Library\/Meshes\/Arrow.rmesh",
             "name": "Mesh",
             "fbx_path": "Library\/Meshes\/Arrow.rmesh",
@@ -94,12 +99,12 @@
         },
         {
             "type": 5,
-            "ownerUID": -108631392,
+            "ownerUID": 1151521920,
             "name": "Moving Object"
         },
         {
             "type": 1,
-            "ownerUID": -108631392,
+            "ownerUID": 1151521920,
             "textures": [
                 {
                     "type": 0,
@@ -109,12 +114,12 @@
         },
         {
             "type": 7,
-            "ownerUID": -108631392,
+            "ownerUID": 1151521920,
             "name": "Movement"
         },
         {
             "type": 2,
-            "ownerUID": -746093632,
+            "ownerUID": 1573318144,
             "position": {
                 "x": -10,
                 "y": 0,
@@ -134,7 +139,7 @@
         },
         {
             "type": 0,
-            "ownerUID": -746093632,
+            "ownerUID": 1573318144,
             "path": "Library\/Meshes\/Amplifier.rmesh",
             "name": "Mesh",
             "fbx_path": "Library\/Meshes\/Amplifier.rmesh",
@@ -142,12 +147,12 @@
         },
         {
             "type": 5,
-            "ownerUID": -746093632,
+            "ownerUID": 1573318144,
             "name": "Static Object"
         },
         {
             "type": 1,
-            "ownerUID": -746093632,
+            "ownerUID": 1573318144,
             "textures": [
                 {
                     "type": 0,

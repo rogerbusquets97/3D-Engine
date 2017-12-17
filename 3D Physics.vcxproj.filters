@@ -426,6 +426,9 @@
     <ClInclude Include="Move.h">
       <Filter>Sources\Modules\Game\GameObjects\Components</Filter>
     </ClInclude>
+    <ClInclude Include="WASDmove.h">
+      <Filter>Sources\Modules\Game\GameObjects\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -714,6 +717,9 @@
       <Filter>Sources\Modules\Game\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="Move.cpp">
+      <Filter>Sources\Modules\Game\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WASDmove.cpp">
       <Filter>Sources\Modules\Game\GameObjects\Components</Filter>
     </ClCompile>
   </ItemGroup>

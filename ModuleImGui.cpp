@@ -15,6 +15,7 @@
 #include "Geomath.h"
 #include "dirent.h"
 #include "PlayPause.h"
+#include "TimeManager.h"
 
 ModuleImGui::ModuleImGui(bool start_enabled) : Module(start_enabled)
 {
@@ -236,15 +237,17 @@ update_status ModuleImGui::Update(float dt)
 	}*/
 
 	if (properties) {
-		curr_obj = App->scene_intro->selected;
-		ImGui::Begin("Properties");
-		
-		if (curr_obj != nullptr) {
-			curr_obj->DrawComponents();
+		if (App->tm->GetGameState() != IN_PLAY) {
+			curr_obj = App->scene_intro->selected;
+			ImGui::Begin("Properties");
+
+			if (curr_obj != nullptr) {
+				curr_obj->DrawComponents();
+			}
+
+			ImGui::End();
 		}
-		
-		ImGui::End();
-		}
+	}
 	
 
 		if (about) {

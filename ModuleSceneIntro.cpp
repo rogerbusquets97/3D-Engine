@@ -15,6 +15,8 @@
 #include "TimeManager.h"
 #include "Move.h"
 #include "DistorsionZone.h"
+#include "WASDmove.h"
+
 
 
 #define MIN_DISTANCE 9999
@@ -46,7 +48,7 @@ bool ModuleSceneIntro::Start()
 	// This objects created here are just for testing purposes, to check that the audio engine is working. Since one of the objects must be moving according to the exercise, and I do not have scripting
 	// the movement is coded in the scene. So I cannot save and load the scene and make the object move once the scene is loaded again, but note that all the audio components can be serialized anyway. 
 
-
+/*/
 	camera_obj = new GameObject("Camera", root);
 
 	Quat rot = Quat::identity;
@@ -65,6 +67,8 @@ bool ModuleSceneIntro::Start()
 	camera_obj->AddComponent(listener);
 	AudioSource* music = new AudioSource(camera_obj);
 	camera_obj->AddComponent(music);
+	Wasd* move = new Wasd(camera_obj);
+	camera_obj->AddComponent(move);
 
 
 
@@ -92,8 +96,8 @@ bool ModuleSceneIntro::Start()
 	non_static_obj->AddComponent(new_mat);
 	all_objects.push_back(non_static_obj);
 	non_static_objects.push_back(non_static_obj);
-	Move* move = new Move(non_static_obj);
-	non_static_obj->AddComponent(move);
+	Move* mo = new Move(non_static_obj);
+	non_static_obj->AddComponent(mo);
 	//Static object
 	static_obj = new GameObject("Static Object", root);
 	
@@ -120,8 +124,8 @@ bool ModuleSceneIntro::Start()
 	mat->AddTexture(tex);
 	static_obj->AddComponent(mat);
 	all_objects.push_back(static_obj);
-	non_static_objects.push_back(static_obj);
-
+	non_static_objects.push_back(static_obj);*/
+	
 
 	float3 max_point;
 	float3 min_point;
@@ -135,13 +139,13 @@ bool ModuleSceneIntro::Start()
 	
 	
 	
-	selected = camera_obj;
+	//selected = camera_obj;
 	
 	change = false;
 	curr_time = 0;
 
 	
-	App->camera->SetCurrentCamera(cam->GetCamera());
+	//App->camera->SetCurrentCamera(cam->GetCamera());
 
 
 	
@@ -228,11 +232,13 @@ GameObject * ModuleSceneIntro::GetSelected() const
 void ModuleSceneIntro::DrawHierarchy() const
 {
 
-	ImGui::Begin("Hierarchy");
-	root->UIDraw();
-	
+	if (App->tm->GetGameState() != IN_PLAY) {
+		ImGui::Begin("Hierarchy");
+		root->UIDraw();
 
-	ImGui::End();
+
+		ImGui::End();
+	}
 }
 
 void ModuleSceneIntro::Clear()
@@ -481,6 +487,7 @@ const char * ModuleSceneIntro::LoadScene(const char * scene_name)
 		Transform* trans= nullptr;
 		Move* m = nullptr;
 		ComponentCamera* cam = nullptr;
+		Wasd* move = nullptr;
 		int aux = 0;
 		const char* mpath = nullptr;
 
@@ -569,6 +576,11 @@ const char * ModuleSceneIntro::LoadScene(const char * scene_name)
 			m = new Move();
 			m->Setname(scene_doc->GetString("name"));
 			c = m;
+			break;
+		case WASD:
+			move = new Wasd();
+			move->Setname(scene_doc->GetString("name"));
+			c = move;
 			break;
 		case CAMERA: 
 			cam = new ComponentCamera();
@@ -675,23 +687,6 @@ update_status ModuleSceneIntro::Update(float dt)
 		change = false;
 	}
 	
-	
-		if (App->camera->GetCurrentCamera() != App->camera->GetEditorCamera()) {
-			Transform* t = (Transform*)camera_obj->FindComponentbyType(TRANSFORM);
-			ComponentCamera* c = (ComponentCamera*)camera_obj->FindComponentbyType(CAMERA);
-			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-				t->SetPosition(t->GetPosition() + float3(0, 0, 0.1));
-			}
-			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-				t->SetPosition(t->GetPosition() + float3(0, 0, -0.1));
-			}
-			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-				t->SetPosition(t->GetPosition() + float3(0.1, 0, 0));
-			}
-			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-				t->SetPosition(t->GetPosition() + float3(-0.1, 0, 0));
-			}
-		}
 
 
 	}

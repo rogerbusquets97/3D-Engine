@@ -196,6 +196,7 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="vPrimitive.h" />
+    <ClInclude Include="WASDmove.h" />
     <ClInclude Include="Wwise.h" />
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +288,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="vPrimitive.cpp" />
+    <ClCompile Include="WASDmove.cpp" />
     <ClCompile Include="Wwise.cpp" />
     <ClCompile Include="Wwise\IO\Common\AkDefaultLowLevelIODispatcher.cpp" />
     <ClCompile Include="Wwise\IO\Common\AkFileLocationBase.cpp" />

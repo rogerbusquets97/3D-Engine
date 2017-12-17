@@ -13,7 +13,8 @@ enum COMPONENT_TYPE {
 	LISTENER,
 	AUDIO_SOURCE,
 	DIST_ZONE,
-	MOVE
+	MOVE,
+	WASD
 };
 
 class Component {
