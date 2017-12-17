@@ -5,7 +5,7 @@
 #include "ModuleImGui.h"
 #include "TimeManager.h"
 #include "AudioEvent.h"
-
+#include "Listener.h"
 AudioSource::AudioSource(GameObject* own) : Component(own)
 {
 	//this->id = RandomNumber();
@@ -41,6 +41,7 @@ AudioSource::~AudioSource()
 
 void AudioSource::Update()
 {
+	//obj->SetAuxiliarySends(1, "Reverb", App->audio->default_listener->GetId());
 
 	if (App->tm->GetGameState() == IN_PLAY) {
 
@@ -70,6 +71,8 @@ void AudioSource::Update()
 
 			events_to_play.clear();
 		}
+
+		App->audio->CheckEnvironments(this->owner);
 	}
 }
 
@@ -151,6 +154,11 @@ void AudioSource::Serialize(JSON_File * doc)
 	doc->SetNumber("type", type);
 	doc->SetNumber("ownerUID", (owner != nullptr) ? owner->GetUID() : -1);
 	doc->SetString("name", name);
+}
+
+void AudioSource::ApplyReverb(float value, const char * bus)
+{
+	obj->SetAuxiliarySends(value, bus, App->audio->default_listener->GetId());
 }
 
 

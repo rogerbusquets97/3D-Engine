@@ -448,6 +448,10 @@ void GameObject::DrawComponents()
 			Wasd* wasd = new Wasd(this);
 			AddComponent(wasd);
 		}
+		if (ImGui::MenuItem("Distorsion Zone")) {
+			DistorsionZone* dist = new DistorsionZone(this);
+			AddComponent(dist);
+		}
 
 
 

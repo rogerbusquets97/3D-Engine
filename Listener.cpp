@@ -33,8 +33,9 @@ void Listener::Update()
 {
 	//Update Listener Positioin
 
+	App->audio->CheckEnvironments(this->owner);
 	Transform* trans = (Transform*)GetOwner()->FindComponentbyType(TRANSFORM);
-
+	
 
 	if (trans!=nullptr)
 	{
@@ -54,7 +55,7 @@ void Listener::Update()
 		box.minPoint = trans->GetPosition() - float3(1, 1, 1);
 		box.maxPoint = trans->GetPosition() + float3(1, 1, 1);
 
-
+		//obj->SetAuxiliarySends(1, "Reverb", obj->GetID());
 	}
 
 
@@ -77,5 +78,5 @@ void Listener::Serialize(JSON_File * doc)
 
 void Listener::ApplyReverb(float value, const char * bus)
 {
-	obj->SetAuxiliarySends(value, bus, obj->GetID());
+	obj->SetAuxiliarySends(value, bus, App->audio->default_listener->GetId());
 }

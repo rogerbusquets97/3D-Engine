@@ -44,7 +44,7 @@ bool ModuleAudio::Init(JSON_File * config)
 	//Wwise::LoadBank("SoundBanks/Test.bnk");
 
 	LoadSoundBank("Blend.bnk");
-
+	
 	
 	return true;
 }
@@ -227,19 +227,31 @@ bool ModuleAudio::CheckEnvironments(GameObject * go)
 	bool ret = false;
 
 	Transform* t = (Transform*)go->FindComponentbyType(TRANSFORM);
-	Listener* audio = (Listener*)go->FindComponentbyType(LISTENER);
-
+	AudioSource* audio = (AudioSource*)go->FindComponentbyType(AUDIO_SOURCE);
+	Listener* list = (Listener*)go->FindComponentbyType(LISTENER);
 	if (!t || !audio)
 		return ret;
 
 	for (int i = 0; i < environments.size(); i++)
 	{
 		float value = 0.0;
-		if (environments[i]->CheckCollision(go->GetBoundingBox()));
+		if (environments[i]->CheckCollision(t->GetPosition()));
 		{
 			value = environments[i]->distorsion_value;
 		}
 		audio->ApplyReverb(value, environments[i]->bus.c_str());
+	}
+
+	if (list != nullptr) {
+		for (int i = 0; i < environments.size(); i++)
+		{
+			float value = 0.0;
+			if (environments[i]->CheckCollision(t->GetPosition()));
+			{
+				value = environments[i]->distorsion_value;
+			}
+			list->ApplyReverb(value, environments[i]->bus.c_str());
+		}
 	}
 
 	return ret;

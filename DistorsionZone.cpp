@@ -29,7 +29,7 @@ void DistorsionZone::Update()
 	{
 		float3 pos = trans->GetPosition();
 		Quat rot = trans->GetRotation();
-		float3 scale = trans->GetScale();
+		float3 scale = trans->GetScale()*size;
 		zone.pos = pos;
 		zone.axis[0] = rot.Transform(float3(1, 0, 0));
 		zone.axis[1] = rot.Transform(float3(0, 1, 0));
@@ -119,9 +119,9 @@ void DistorsionZone::DebugDraw()
 	delete[] colors;
 }
 
-bool DistorsionZone::CheckCollision(AABB target)
+bool DistorsionZone::CheckCollision(float3 target)
 {
-	return zone.Intersects(target);
+	return zone.Contains(target);
 }
 
 void DistorsionZone::UI_draw()
@@ -136,7 +136,7 @@ void DistorsionZone::UI_draw()
 		bus = bus_name;
 
 		ImGui::DragFloat("Value", &distorsion_value, 0.1, 0.0, 12.0, "%.1f");
-
+		ImGui::DragFloat("Size", &size, 0, 100);
 		delete[] bus_name;
 	}
 }

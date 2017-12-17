@@ -15,7 +15,7 @@ public:
 	DistorsionZone();
 	void Update();
 	void DebugDraw();
-	bool CheckCollision(AABB target);
+	bool CheckCollision(float3 target);
 	void UI_draw();
 
 public:
@@ -24,6 +24,7 @@ public:
 	float distorsion_value = 0.f;
 	math::OBB zone;
 	float radius;
+	float size = 1;
 };
 
 
