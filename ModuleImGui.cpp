@@ -303,7 +303,7 @@ update_status ModuleImGui::Update(float dt)
 			
 			struct dirent* pent = NULL;
 			DIR* pdir = NULL;
-			if ((pdir = opendir("Assets/Scenes")) != 0) {
+			if ((pdir = opendir("Library/Scenes")) != 0) {
 				while ((pent = readdir(pdir)) != NULL) {
 					if (pent->d_type == DT_REG)
 						files.push_back(std::string(pent->d_name));
@@ -349,7 +349,7 @@ update_status ModuleImGui::Update(float dt)
 
 			struct dirent* pent = NULL;
 			DIR* pdir = NULL;
-			if ((pdir = opendir("Assets/Scenes/")) != 0) {
+			if ((pdir = opendir("Library/Scenes/")) != 0) {
 				while ((pent = readdir(pdir)) != NULL) {
 					if (pent->d_type == DT_REG)
 						files.push_back(std::string(pent->d_name));

@@ -1,0 +1,164 @@
+{
+    "scene": {
+        "name": "test"
+    },
+    "gameobjects": [
+        {
+            "static": false,
+            "UID": 551004672,
+            "parentUID": -1,
+            "name": "Game"
+        },
+        {
+            "static": false,
+            "UID": 1685950976,
+            "parentUID": 551004672,
+            "name": "Camera"
+        },
+        {
+            "static": false,
+            "UID": 1151521920,
+            "parentUID": 551004672,
+            "name": "Moving Object"
+        },
+        {
+            "static": false,
+            "UID": 1573318144,
+            "parentUID": 551004672,
+            "name": "Static Object"
+        }
+    ],
+    "components": [
+        {
+            "type": 2,
+            "ownerUID": 1685950976,
+            "position": {
+                "x": 0,
+                "y": 2,
+                "z": -10
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 3,
+            "ownerUID": 1685950976,
+            "name": "Camera"
+        },
+        {
+            "type": 4,
+            "ownerUID": 1685950976,
+            "name": "Audio Listener"
+        },
+        {
+            "type": 5,
+            "ownerUID": 1685950976,
+            "name": "Camera"
+        },
+        {
+            "type": 8,
+            "ownerUID": 1685950976,
+            "name": "Move"
+        },
+        {
+            "type": 2,
+            "ownerUID": 1151521920,
+            "position": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "rotation": {
+                "x": 0,
+                "y": 0,
+                "z": 0,
+                "w": 1
+            },
+            "scale": {
+                "x": 1,
+                "y": 1,
+                "z": 1
+            }
+        },
+        {
+            "type": 0,
+            "ownerUID": 1151521920,
+            "path": "Library\/Meshes\/Arrow.rmesh",
+            "name": "Mesh",
+            "fbx_path": "Library\/Meshes\/Arrow.rmesh",
+            "meshdoc": "25d69498643720af60a3a54ce13ba694"
+        },
+        {
+            "type": 5,
+            "ownerUID": 1151521920,
+            "name": "Moving Object"
+        },
+        {
+            "type": 1,
+            "ownerUID": 1151521920,
+            "textures": [
+                {
+                    "type": 0,
+                    "path": "Library\/Textures\/Arrow.dds"
+                }
+            ]
+        },
+        {
+            "type": 7,
+            "ownerUID": 1151521920,
+            "name": "Movement"
+        },
+        {
+            "type": 2,
+            "ownerUID": 1573318144,
+            "position": {
+                "x": -10,
+                "y": 0,
+                "z": 10
+            },
+            "rotation": {
+                "x": -0.5,
+                "y": 0.5,
+                "z": 0.5,
+                "w": 0.5
+            },
+            "scale": {
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.019999999552965164
+            }
+        },
+        {
+            "type": 0,
+            "ownerUID": 1573318144,
+            "path": "Library\/Meshes\/Amplifier.rmesh",
+            "name": "Mesh",
+            "fbx_path": "Library\/Meshes\/Amplifier.rmesh",
+            "meshdoc": "84c40473414caf2ed4a7b1283e48bbf4"
+        },
+        {
+            "type": 5,
+            "ownerUID": 1573318144,
+            "name": "Static Object"
+        },
+        {
+            "type": 1,
+            "ownerUID": 1573318144,
+            "textures": [
+                {
+                    "type": 0,
+                    "path": "Library\/Textures\/Amplifier.dds"
+                }
+            ]
+        }
+    ]
+}

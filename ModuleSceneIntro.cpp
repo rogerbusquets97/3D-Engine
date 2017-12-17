@@ -44,10 +44,7 @@ bool ModuleSceneIntro::Start()
 
 	
 
-	//NOTE:
-	// This objects created here are just for testing purposes, to check that the audio engine is working. Since one of the objects must be moving according to the exercise, and I do not have scripting
-	// the movement is coded in the scene. So I cannot save and load the scene and make the object move once the scene is loaded again, but note that all the audio components can be serialized anyway. 
-
+	
 /*/
 	camera_obj = new GameObject("Camera", root);
 
@@ -260,14 +257,14 @@ void ModuleSceneIntro::IntersectAABB(LineSegment & picking, std::vector<GameObje
 	for (std::list<GameObject*>::iterator it = distance_list.begin(); it != distance_list.end(); it++) {
 		if (picking.Intersects((*it)->GetBoundingBox())) {
 			DistanceList.push_back((*it));
-			LOG_OUT("AABB hit");
+			//LOG_OUT("AABB hit");
 		}
 	}
 
 	for (std::list<GameObject*>::iterator it = non_static_objects.begin(); it != non_static_objects.end(); it++) {
 		if (picking.Intersects((*it)->GetBoundingBox())) {
 			DistanceList.push_back((*it));
-			LOG_OUT("AABB hit");
+			//LOG_OUT("AABB hit");
 		}
 	}
 
@@ -315,7 +312,7 @@ GameObject * ModuleSceneIntro::SelectObject(LineSegment picking)
 			if (m != nullptr) {
 				bool hit = m->TriCheck(picking, dist, hitpoint);
 				if (hit) {
-					LOG_OUT("HIT!!");
+					//LOG_OUT("HIT!!");
 					if (dist < last_distance) {
 						last_distance = dist;
 						closest = DistanceList[i];
@@ -405,7 +402,7 @@ const char* ModuleSceneIntro::Serialize(const char * name)
 const char * ModuleSceneIntro::LoadScene(const char * scene_name)
 {
 
-	std::string file = "Assets/Scenes/";
+	std::string file = "Library/Scenes/";
 	file += scene_name;
 
 	JSON_File* scene_doc = App->json->LoadJSON(file.c_str());
