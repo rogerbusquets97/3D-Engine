@@ -3,59 +3,47 @@
 #include "Application.h"
 #include "ModuleAudio.h"
 #include "ModuleRenderer3D.h"
-
+#include "ModuleImGui.h"
 
 DistorsionZone::DistorsionZone(GameObject * own) : Component(own)
 {
 	Setname("Distorsion Zone");
 	SetType(DIST_ZONE);
 	zone.SetNegativeInfinity();
-	
-	zone.minPoint = own->GetBoundingBox().minPoint;
-	zone.maxPoint = own->GetBoundingBox().maxPoint;
+	App->audio->AddEnvironment(this);
 	
 }
 
 DistorsionZone::DistorsionZone()
 {
+	Setname("Distorsion Zone");
+	SetType(DIST_ZONE);
+	zone.SetNegativeInfinity();
+	App->audio->DeleteEnvironment(this);
 }
 
 void DistorsionZone::Update()
 {
-/*
-	zone.minPoint = owner->GetBoundingBox().minPoint;
-	zone.maxPoint = owner->GetBoundingBox().maxPoint;
+	Transform* trans = (Transform*)owner->FindComponentbyType(TRANSFORM);
+	if (trans)
+	{
+		float3 pos = trans->GetPosition();
+		Quat rot = trans->GetRotation();
+		float3 scale = trans->GetScale();
+		zone.pos = pos;
+		zone.axis[0] = rot.Transform(float3(1, 0, 0));
+		zone.axis[1] = rot.Transform(float3(0, 1, 0));
+		zone.axis[2] = rot.Transform(float3(0, 0, 1));
+		zone.r = scale;
 
-	//check collision with sound objects and modify rtpc value if so
-	//add aabb to the SoundObject to check the collision easily
-
-	if (App->audio->default_listener != nullptr) {
-		if (zone.Intersects(App->audio->default_listener->box)) {
-			//set rtpc value
-			AkReal32 nDryRatio = 0.5f;
-			AkReal32 nHangarRatio = 0.25f;
-			AkReal32 nTunnelRatio = 0.25f;
-
-			AkAuxSendValue aEnvs[2];
-			aEnvs[0].listenerID = App->audio->default_listener->GetID(); // Use the same set of listeners assigned via the SetListeners/SetDefaultListeners API.
-			aEnvs[0].auxBusID = AK::SoundEngine::GetIDFromString("Reverb");
-			aEnvs[0].fControlValue = nHangarRatio;
-			aEnvs[1].listenerID = App->audio->default_listener->GetID();// Use the same set of listeners assigned via the SetListeners/SetDefaultListeners API.
-			aEnvs[1].auxBusID = AK::SoundEngine::GetIDFromString("Reverb");
-			aEnvs[1].fControlValue = nTunnelRatio;
-
-			AK::SoundEngine::SetGameObjectOutputBusVolume(App->audio->def, nDryRatio);
-			AK::SoundEngine::SetGameObjectAuxSendValues(GAME_OBJECT_ID_HUMAN, aEnvs, 2);
-
-		}
+		DebugDraw();
 	}
-	*/
 }
 
 void DistorsionZone::DebugDraw()
 {
 	float3 corners[8];
-	AABB box = zone;
+	OBB box = zone;
 	box.GetCornerPoints(corners);
 	const int s = 24;
 
@@ -129,5 +117,27 @@ void DistorsionZone::DebugDraw()
 
 	delete[] lines;
 	delete[] colors;
+}
+
+bool DistorsionZone::CheckCollision(AABB target)
+{
+	return zone.Intersects(target);
+}
+
+void DistorsionZone::UI_draw()
+{
+	if (ImGui::CollapsingHeader("Distorsion Zone")) {
+		char* bus_name = new char[41];
+
+		std::copy(bus.begin(), bus.end(), bus_name);
+		bus_name[bus.length()] = '\0';
+
+		ImGui::InputText("Target bus", bus_name, 40);
+		bus = bus_name;
+
+		ImGui::DragFloat("Value", &distorsion_value, 0.1, 0.0, 12.0, "%.1f");
+
+		delete[] bus_name;
+	}
 }
 

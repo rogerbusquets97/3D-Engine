@@ -14,7 +14,8 @@
 #include "SoundBank.h"
 #include "ModuleImGui.h"
 #include "Listener.h"
-
+#include "Transform.h"
+#include "AudioSource.h"
 //CAkFilePackageLowLevelIOBlocking g_lowLevelIO;
 
 #define BANK_BASE_PATH "SoundBanks/"
@@ -202,6 +203,46 @@ void ModuleAudio::ImGuiDraw()
 	
 
 	
+}
+
+void ModuleAudio::AddEnvironment(DistorsionZone * zone)
+{
+	environments.push_back(zone);
+}
+
+void ModuleAudio::DeleteEnvironment(DistorsionZone * zone)
+{
+	for (int i = 0; i < environments.size(); i++)
+	{
+		if (environments[i] == zone)
+		{
+			environments.erase((environments.begin() + i));
+			break;
+		}
+	}
+}
+
+bool ModuleAudio::CheckEnvironments(GameObject * go)
+{
+	bool ret = false;
+
+	Transform* t = (Transform*)go->FindComponentbyType(TRANSFORM);
+	Listener* audio = (Listener*)go->FindComponentbyType(LISTENER);
+
+	if (!t || !audio)
+		return ret;
+
+	for (int i = 0; i < environments.size(); i++)
+	{
+		float value = 0.0;
+		if (environments[i]->CheckCollision(go->GetBoundingBox()));
+		{
+			value = environments[i]->distorsion_value;
+		}
+		audio->ApplyReverb(value, environments[i]->bus.c_str());
+	}
+
+	return ret;
 }
 
 

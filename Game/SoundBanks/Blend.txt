@@ -16,6 +16,7 @@ Auxiliary Bus	ID	Name			Wwise Object Path	Notes
 
 Effect plug-ins	ID	Name	Type				Notes
 	702543456	Tunnel1	Wwise Matrix Reverb			
+	2265839006	Not_A_Yellow_Submarine	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	102774834	Muddy Waters - Hoochie Coochie Man	C:\Users\USUARIO\Documents\WwiseProjects\BlendingMusic\.cache\Windows\SFX\Muddy Waters - Hoochie Coochie Man_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Blend\Muddy Waters - Hoochie Coochie Man		30527552

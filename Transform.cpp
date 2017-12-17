@@ -213,6 +213,11 @@ float3 Transform::GetPosition() const
 	return position;
 }
 
+float3 Transform::GetScale() const
+{
+	return scale;
+}
+
 void Transform::OnGuizmo()
 {
 

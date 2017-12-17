@@ -25,6 +25,7 @@ namespace Wwise
 
 		void PlayMusic(unsigned long music_id);
 		void PlayMusic(const char* music_name);
+		void SetAuxiliarySends(AkReal32 value, const char * target_bus, AkGameObjectID listener_id);
 
 	private:
 		AkGameObjectID SoundID;

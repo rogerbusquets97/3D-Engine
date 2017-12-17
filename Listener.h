@@ -15,6 +15,7 @@ public:
 	void Update();
 	AkGameObjectID GetId()const;
 	void Serialize(JSON_File* doc);
+	void ApplyReverb(float value, const char* bus);
 
 
 private:

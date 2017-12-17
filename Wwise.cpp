@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "include_wwise.h"
 #include "Wwise/IO/Win32/AkFilePackageLowLevelIOBlocking.h"
+#include <AK/Plugin/AkRoomVerbFXFactory.h>
 
 CAkFilePackageLowLevelIOBlocking g_lowLevelIO;
 
@@ -325,4 +326,14 @@ void Wwise::SoundObject::PlayMusic(const char * music_name)
 {
 	AK::SoundEngine::PostEvent(music_name, SoundID, AK_EnableGetMusicPlayPosition);
 
+}
+
+void Wwise::SoundObject::SetAuxiliarySends(AkReal32 value, const char * target_bus, AkGameObjectID listener_id)
+{
+	AkAuxSendValue reverb;
+	reverb.listenerID = listener_id;
+	reverb.auxBusID = AK::SoundEngine::GetIDFromString(target_bus);
+	reverb.fControlValue = value;
+
+	AKRESULT res = AK::SoundEngine::SetGameObjectAuxSendValues(SoundID, &reverb, 1);
 }

@@ -74,3 +74,8 @@ void Listener::Serialize(JSON_File * doc)
 	doc->SetNumber("ownerUID", (owner != nullptr) ? owner->GetUID() : -1);
 	doc->SetString("name", name);
 }
+
+void Listener::ApplyReverb(float value, const char * bus)
+{
+	obj->SetAuxiliarySends(value, bus, obj->GetID());
+}

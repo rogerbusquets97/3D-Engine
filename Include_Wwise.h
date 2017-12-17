@@ -19,6 +19,7 @@
 #pragma comment( lib, "Wwise/Release(StaticCRT)/lib/AkMusicEngine.lib")
 #pragma comment( lib, "Wwise/Release(StaticCRT)/lib/AkMemoryMgr.lib")
 #pragma comment( lib, "Wwise/Release(StaticCRT)/lib/AkStreamMgr.lib")
+#pragma comment( lib, "Wwise/Release(StaticCRT)/lib/AkRoomVerbFX.lib")
 #else
 #include <AK/Comm/AkCommunication.h>
 #pragma comment( lib, "Wwise/Debug(StaticCRT)/lib/CommunicationCentral.lib")
@@ -27,6 +28,7 @@
 #pragma comment( lib, "Wwise/Debug(StaticCRT)/lib/AkMusicEngine.lib")
 #pragma comment( lib, "Wwise/Debug(StaticCRT)/lib/AkMemoryMgr.lib")
 #pragma comment( lib, "Wwise/Debug(StaticCRT)/lib/AkStreamMgr.lib")
+#pragma comment( lib, "Wwise/Debug(StaticCRT)/lib/AkRoomVerbFX.lib")
 #endif
 
 // Microsoft DirectX external libs

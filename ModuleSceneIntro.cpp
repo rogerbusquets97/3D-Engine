@@ -14,9 +14,8 @@
 #include "AudioSource.h"
 #include "TimeManager.h"
 #include "Move.h"
+#include "DistorsionZone.h"
 
-#include <AK/Plugin/AkMatrixReverbFXFactory.h>
-#pragma comment( lib, "Wwise/Debug(StaticCRT)/lib/AkMatrixReverbFX.lib");
 
 #define MIN_DISTANCE 9999
 
@@ -48,7 +47,7 @@ bool ModuleSceneIntro::Start()
 	// the movement is coded in the scene. So I cannot save and load the scene and make the object move once the scene is loaded again, but note that all the audio components can be serialized anyway. 
 
 
-	/*camera_obj = new GameObject("Camera", root);
+	camera_obj = new GameObject("Camera", root);
 
 	Quat rot = Quat::identity;
 	float3 scale;
@@ -81,6 +80,7 @@ bool ModuleSceneIntro::Start()
 	new_mesh->Setname("Mesh");
 	new_mesh->SetPath("Library/Meshes/Arrow.rmesh");
 	non_static_obj->AddComponent(new_mesh);
+	non_static_obj->RecalculateAABB();
 	App->loader->meshes.push_back(new_mesh);
 	AudioSource* source = new AudioSource(non_static_obj);
 	non_static_obj->AddComponent(source);
@@ -109,6 +109,7 @@ bool ModuleSceneIntro::Start()
 	m->Setname("Mesh");
 	m->SetPath("Library/Meshes/Amplifier.rmesh");
 	static_obj->AddComponent(m);
+	static_obj->RecalculateAABB();
 	App->loader->meshes.push_back(m);
 	AudioSource* sound = new AudioSource(static_obj);
 	static_obj->AddComponent(sound);
@@ -119,7 +120,7 @@ bool ModuleSceneIntro::Start()
 	mat->AddTexture(tex);
 	static_obj->AddComponent(mat);
 	all_objects.push_back(static_obj);
-	non_static_objects.push_back(static_obj);*/
+	non_static_objects.push_back(static_obj);
 
 
 	float3 max_point;
@@ -134,13 +135,13 @@ bool ModuleSceneIntro::Start()
 	
 	
 	
-	//selected = camera_obj;
+	selected = camera_obj;
 	
 	change = false;
 	curr_time = 0;
 
 	
-	//App->camera->SetCurrentCamera(cam->GetCamera());
+	App->camera->SetCurrentCamera(cam->GetCamera());
 
 
 	
@@ -676,7 +677,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	
 	
 		if (App->camera->GetCurrentCamera() != App->camera->GetEditorCamera()) {
-			/*Transform* t = (Transform*)camera_obj->FindComponentbyType(TRANSFORM);
+			Transform* t = (Transform*)camera_obj->FindComponentbyType(TRANSFORM);
 			ComponentCamera* c = (ComponentCamera*)camera_obj->FindComponentbyType(CAMERA);
 			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 				t->SetPosition(t->GetPosition() + float3(0, 0, 0.1));
@@ -689,7 +690,7 @@ update_status ModuleSceneIntro::Update(float dt)
 			}
 			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 				t->SetPosition(t->GetPosition() + float3(-0.1, 0, 0));
-			}*/
+			}
 		}
 
 

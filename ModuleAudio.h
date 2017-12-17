@@ -5,6 +5,7 @@
 #include "Include_Wwise.h"
 #include "Geomath.h"
 #include "Wwise.h"
+#include "DistorsionZone.h"
 
 class Listener;
 
@@ -37,11 +38,18 @@ public:
 	void SetRTPvalue(const char* rtpc, float value);
 	void StopAllEvents();
 	void ImGuiDraw();
+
+	//Environments
+
+	void AddEnvironment(DistorsionZone* zone);
+	void DeleteEnvironment(DistorsionZone* zone);
+	bool CheckEnvironments(GameObject* go);
 	//Listener
 
 	Wwise::SoundObject* camera_listener = nullptr;
 	std::list <Wwise::SoundObject*> sound_obj;
 	std::list<SoundBank*> soundbanks;
+	std::vector<DistorsionZone*>environments;
 
 	Listener* default_listener = nullptr;
 	unsigned long listener_id = 1;

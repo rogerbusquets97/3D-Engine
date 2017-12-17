@@ -2,5 +2,6 @@
 <PluginInfo Project="BlendingMusic" Platform="Windows" BasePlatform="Windows">
 	<Plugins>
 		<Plugin Name="Wwise Matrix Reverb" ID="7536643" DLL="AkMatrixReverb"/>
+		<Plugin Name="Wwise RoomVerb" ID="7733251" DLL="AkRoomVerb"/>
 	</Plugins>
 </PluginInfo>

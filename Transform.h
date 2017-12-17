@@ -34,6 +34,7 @@ class Transform : public Component {
 		float4x4 GetGlobalTransform();
 		void RecalculateTransform();
 		float3 GetPosition()const;
+		float3 GetScale()const;
 		void OnGuizmo();
 		void Serialize(JSON_File* doc);
 		

@@ -15,12 +15,14 @@ public:
 	DistorsionZone();
 	void Update();
 	void DebugDraw();
+	bool CheckCollision(AABB target);
+	void UI_draw();
 
-private:
+public:
 
-	const char* bus;
-	int distorsion_value = 0;
-	AABB zone;
+	std::string bus = "";
+	float distorsion_value = 0.f;
+	math::OBB zone;
 	float radius;
 };
 
