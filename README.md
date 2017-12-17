@@ -47,14 +47,16 @@ Link to the Github Repository ![https://github.com/rogerbusquets97/3D-Engine](ht
 
 Opens the the about window that shows information about the engine (the name of the creators, libraries used and the license)
 
-## Scene Info
+## Scene Info - Audio Engine
 
-In the default scene a default camera is created autamatically when it is loaded, this camera has the camera culling option, if it is enabled,
-onlky elements inside its furstum will be rendered. (it is disabled by default).
+The release contains a saved scene named "test.json". If the scene is loaded there will appear a very simple scene with few audio elements in order to check the audio functionallity. One of the objects (Arrow), is moveable so when pressing play
+it will move with arrow keys, as well as the camera object that will move with wasd. In order to hear something when playing the scene is necessary to go to one of the objects that contains an audio source components and specify which event to play
+pressing send, so the event will be played when the game starts.(So you can check each event separetely or all together, though it will sound weird). There are three events able. The "Play_Blend" event will trigger two background musics that will blend in a loop.
+The Play_Short_Music event will trigger a 3D sound (spatial audio will be obvious when playing the scene and moving around). The Play_spell4 will trigger an FX also with 3D positioning. 
+All the audios were set to loop infinitely in the Wwise editor in order to check the engines functionallity, but in a real context, except from the songs, FXs should not loop. The "send" button is also for testing purposes, in a real situation those events can be
+played by using the SendEvent function from the AudioSource component. 
 
-There also an octree created that is debug drawn in order to make its utility visible, game objects are non static by default, but whenever a game object is set to static(in the porperties panel) it will be insterted into the octree and the octree will resize itself if needed. 
-
-Any mesh loaded into the engine will be saved in .rmesh format inside the library folder, as well as textures will be saved as dds files. 
+General volume can be changed from the configuration panel, and the application can be also muted. 
 
 
 
